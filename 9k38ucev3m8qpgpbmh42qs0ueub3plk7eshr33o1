@@ -1,0 +1,47 @@
+Return-Path: <bonafidejed@icloud.com>
+Received: from outbound.st.icloud.com (p-east2-cluster4-host7-snip4-4.eps.apple.com [57.103.78.235])
+ by inbound-smtp.us-east-1.amazonaws.com with SMTP id 9k38ucev3m8qpgpbmh42qs0ueub3plk7eshr33o1
+ for 4072229926@fax.dn358.com;
+ Thu, 24 Apr 2025 02:22:50 +0000 (UTC)
+X-SES-Spam-Verdict: PASS
+X-SES-Virus-Verdict: PASS
+Received-SPF: pass (spfCheck: domain of icloud.com designates 57.103.78.235 as permitted sender) client-ip=57.103.78.235; envelope-from=bonafidejed@icloud.com; helo=outbound.st.icloud.com;
+Authentication-Results: amazonses.com;
+ spf=pass (spfCheck: domain of icloud.com designates 57.103.78.235 as permitted sender) client-ip=57.103.78.235; envelope-from=bonafidejed@icloud.com; helo=outbound.st.icloud.com;
+ dkim=pass header.i=@icloud.com;
+ dmarc=pass header.from=icloud.com;
+X-SES-RECEIPT: AEFBQUFBQUFBQUFIaXJjN2VOU1h3bkFyVFJWRVppaWFqY2c3b0tCVnJURkR0ZVBqaXZ0c0tjRURrL3l2WFdtTmUzS1dhVDFKTko2UGlCRlRsM3dTeVR0TWErNVBWcTF2L21xT3F0eUdvUzBaaUw5c1d0SDNzOHRScVd1dlhlejlZcm91ZGxGblQ4SzhlUFp3blVub2ljcVRFc1Z3eWdwd09qS0lGQm5WVUF4eURIb2RJSG1oS2o0L1lJNGhtOCtiK0NFcVp3M1BIYXF6WEI2RmxUNXNucTVJdXFWcWZJd1N5R0Q1QnNBdjh1MkdLRHA1QUpVZnhTZFYxbzJyOU1nOHdFd29RUjFMd1Evc2t5aFY5eFNCdXoxa3JxUXNlQS96ZDdkaWpFVWFIVitJeG9XN2JvV2U5ZXc9PQ==
+X-SES-DKIM-SIGNATURE: a=rsa-sha256; q=dns/txt; b=pWH/RSBJt1D3dBwKzllK00PhAoe+T1s3Y0YWxwq1ymoIuAjcP5GBRetIYsijGWmBW0Wx1ydOmTXiR4GAXEEPAEtwf/eReR4MMorZsYyloSom77tY9lUfmY0hMVVlA+lsP6SOEAQTK3tFS9774FOFJeijSlPirm/ii1Z6FLxNhxY=; c=relaxed/simple; s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw; d=amazonses.com; t=1745461371; v=1; bh=YGmcIImoxXVpP3HvbohP780P8GBjyrNU+z5AtS26E14=; h=From:To:Cc:Bcc:Subject:Date:Message-ID:MIME-Version:Content-Type:X-SES-RECEIPT;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com;
+	s=1a1hai; bh=YGmcIImoxXVpP3HvbohP780P8GBjyrNU+z5AtS26E14=;
+	h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:To:x-icloud-hme;
+	b=VQrZiQmEuGl9d5hqLwS4t+4pozlEF1vtBXZi9eYG7P/jloKvbNrBkHA2mfA6eIgdh
+	 Hg5KM0Cy7bIOUYuhD/do3emPGHgtO59XdtA849o+fZjMn2oVnTFQ4tDPRUHRcornHF
+	 8/Uzuse3UkodNBabZPt/cUdVPZ9tL5KtpjntKFW/21AJ6mhLtORevs5ujw+pKXiGq4
+	 TbiUe94ZAeKPszzpht5L9GbxjP/1RTxJ9J5t+l4dMezH2YGzwTYimYj5g+Ztsmn7XF
+	 4VSANtNWUQBGz7Vb/3/LGIgVSH/rD75D8szBUO62RBIPT15RYUR0hPAjNHFno/sN+R
+	 KGYLwcNMXMQnQ==
+Received: from smtpclient.apple (st-asmtp-me-k8s.p00.prod.me.com [17.42.251.67])
+	by outbound.st.icloud.com (Postfix) with ESMTPSA id 70F5618000A6
+	for <4072229926@fax.dn358.com>; Thu, 24 Apr 2025 02:22:48 +0000 (UTC)
+From: Jed <bonafidejed@icloud.com>
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.400.131.1.6\))
+Subject: Test Three
+Message-Id: <B1559140-EB4C-4158-9E47-BF640E341E72@icloud.com>
+Date: Wed, 23 Apr 2025 22:22:37 -0400
+To: 4072229926@fax.dn358.com
+X-Mailer: Apple Mail (2.3826.400.131.1.6)
+X-Proofpoint-GUID: toDvS6Ut1Z6N1JSErCEN1I57CSTxYVJ_
+X-Proofpoint-ORIG-GUID: toDvS6Ut1Z6N1JSErCEN1I57CSTxYVJ_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.680,FMLib:17.12.80.40
+ definitions=2025-04-24_01,2025-04-22_01,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 adultscore=0 spamscore=0
+ bulkscore=0 malwarescore=0 mlxscore=0 suspectscore=0 mlxlogscore=321
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2411120000 definitions=main-2504240012
+
+Uno Dos Tres

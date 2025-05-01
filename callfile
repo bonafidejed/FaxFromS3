@@ -1,0 +1,6 @@
+Channel: Local/12132942943@from-faxfile
+Context: to-sendfax
+Extension: 12132942943
+Priority: 1
+Callerid: +14075025023
+Setvar: FAXFILE=9999
