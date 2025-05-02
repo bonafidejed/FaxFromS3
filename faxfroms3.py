@@ -1,5 +1,5 @@
 #!/usr/bin/env -S sh -c 'exec "$(dirname "$0")/.venv/bin/python3" "$0" "$@"'
-import email, base64, re, logging, os, urllib.request
+import email, base64, re, logging, os, urllib.request, subprocess
 from email.parser import BytesParser
 from pypdf import PdfWriter
 from boto3 import client
@@ -77,6 +77,7 @@ if 'Contents' in s3_objectdict:
                             pdf_file.write(decoded_bytes)
             if attachment_counter > 0:
                 pdf_filename = os.path.join('/tmp/',f"{unique_id}.pdf")
+                tif_filename = os.path.join('/tmp/',f"{unique_id}.tif")
                 logger.info(f"Combining/renaming {attachment_counter} PDF files into {pdf_filename}.")
                 if attachment_counter > 1:
                     combined_pdf = PdfWriter()
@@ -89,6 +90,9 @@ if 'Contents' in s3_objectdict:
                         os.remove(pdf)
                 else:
                     os.rename(os.path.join('/tmp/',f"{unique_id}-{attachment_counter}.pdf"),pdf_filename)
+                conversion_args = args = ["gs","-q","-dNOPAUSE","-sDEVICE=tiffg4","-sPAPERSIZE=letter",f"-sOutputFile={tif_filename}",f"{pdf_filename}","-c","quit"]
+                subprocess.call(args)
+                os.remove(pdf_filename)
                 call_filename = os.path.join(outgoing_dir, f"{unique_id}")
                 call_text =  f"Channel: Local/{phone_number}@from-faxfile" + ("\r\n")
                 call_text += f"Context: to-sendfax" + ("\r\n")
