@@ -24,14 +24,14 @@ if 'FAXFROMD3_OUTGOING_DIR' in os.environ:
 else:
     outgoing_dir = '/var/spool/asterisk/outgoing/'
 
-try:
-    test_filename = os.path.join(outgoing_dir, 'test')
-    with open(f"{test_filename}", 'w') as call_file:
-        call_file.write("")
-    os.remove(f"{test_filename}")
-except:
-    logger.error(f"Could not create a test file in callfile directory {outgoing_dir}.")
-    quit(1)
+# try:
+#     test_filename = os.path.join(outgoing_dir, 'test')
+#     with open(f"{test_filename}", 'w') as call_file:
+#         call_file.write("")
+#     os.remove(f"{test_filename}")
+# except:
+#     logger.error(f"Could not create a test file in callfile directory {outgoing_dir}.")
+#     quit(1)
 
 logger.info('Looking for emails in the S3 bucket.')
 s3connection = client('s3')  # again assumes boto.cfg setup, assume AWS S3
@@ -90,9 +90,11 @@ if 'Contents' in s3_objectdict:
                         os.remove(pdf)
                 else:
                     os.rename(os.path.join('/tmp/',f"{unique_id}-{attachment_counter}.pdf"),pdf_filename)
+                logger.info(f"Creating {tif_filename} from {pdf_filename} and deleting the PDF.")
                 conversion_args = args = ["gs","-q","-dNOPAUSE","-sDEVICE=tiffg4","-sPAPERSIZE=letter",f"-sOutputFile={tif_filename}",f"{pdf_filename}","-c","quit"]
                 subprocess.call(args)
                 os.remove(pdf_filename)
+                call_tempfile = os.path.join('/tmp/', f'{unique_id}')
                 call_filename = os.path.join(outgoing_dir, f"{unique_id}")
                 call_text =  f"Channel: Local/{phone_number}@from-faxfile" + ("\r\n")
                 call_text += f"Context: to-sendfax" + ("\r\n")
@@ -100,9 +102,11 @@ if 'Contents' in s3_objectdict:
                 call_text += f"Priority: 1" + ("\r\n")
                 call_text += f"MaxRetries: 2" + ("\r\n")
                 call_text += f"Setvar: FAXFILE={unique_id}" + ("\r\n")
-                logger.info(f"Creating callfile as {call_filename}.")
-                with open(call_filename, 'w') as call_file:
+                logger.info(f"Creating callfile in temporary location {call_tempfile}.")
+                with open(call_tempfile, 'w') as call_file:
                     call_file.writelines(call_text)
+                logger.info(f"Moving callfile to {call_filename}.")
+                os.rename(call_tempfile, call_filename)
         logger.info(f"Done processing this email, so deleting {object_info['Key']}")
         s3connection.delete_object(Bucket='fax.dn358.com', Key=object_info['Key'])
 else:
